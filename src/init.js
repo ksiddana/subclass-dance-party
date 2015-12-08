@@ -3,6 +3,7 @@ $(document).ready(function(){
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
+
      * buttons on dancefloor.html. You should only need to make one small change to it.
      * As long as the "data-dancer-maker-function-name" attribute of a
      * class="addDancerButton" DOM node matches one of the names of the
@@ -15,6 +16,8 @@ $(document).ready(function(){
      * A new object of the given type will be created and added
      * to the stage.
      */
+     var inputColor = prompt("Which color would you like? \n Red, blue, green, black, white, grey, orange or yellow?");
+
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
 
     // get the maker function for the kind of dancer we're supposed to make
@@ -22,12 +25,36 @@ $(document).ready(function(){
 
     // make a dancer with a random position
 
-    var dancer = dancerMakerFunction(
+    var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.random() * 1000
+      Math.random() * 3000, inputColor
     );
     $('body').append(dancer.$node);
   });
+ 
+  $(".linedancer").on("click", function(){
+    // var inputColor = prompt("What color would you like?");
+    // inputColor()
+    var functionName = $(this).data("dancer-maker-function-name");
+    console.log(functionName)
+    var makerFunction = window[functionName];
+    function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+    }
+    // console.log(window)
+    var coloredDancer = new makerFunction(
+      $("body").height() * Math.random(),
+      $("body").width() * Math.random(),
+      Math.random() * 1000, getRandomColor()
+      );
+    $('body').append(coloredDancer.$node);
+  });
+
 });
 
