@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     var functionName = $(this).data("dancer-maker-function-name");
     var makerFunction = window[functionName];
-
+    // console.log(makerFunction)
     function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -37,6 +37,7 @@ $(document).ready(function(){
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
+
     var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
@@ -45,12 +46,19 @@ $(document).ready(function(){
     window.dancers.push(dancer)
     $('body').append(dancer.$node);
     $('.functionLineUp').on('click',function(e){
-    
-      for (var i = 0; i < window.dancers.length; i++) {
+    // e.stopPropagation()
+    // var functionName = $(this).data("dancer-maker-function-name");
+    // var lineUpMakerFunction = window[functionName];
+    // console.log(lineUpMakerFunction)
+        console.log(window.dancers)
+    // console.log(window.dancers[0].lineUp)
+  for (var i = 0; i < window.dancers.length; i++) {
+      // if(window.dancers[i]=== makeBlinkyDancer){
+      console.log('working')
         window.dancers[i].lineUp();  
-      }
-    })
-  }); // end of Dancer Button
+    }
+  })
+  });
  
   
 
@@ -71,11 +79,21 @@ $(document).ready(function(){
     window.dancers.push(lineDancer)
     $('body').append(lineDancer.$node);
   
-  }); // end of Line Dancer Function
+  });
 
-  $("body").on("mouseover", ".dancer", function(event){
+  $("body").on("mouseover", "span", function(event){
+    console.log("Mouse over Triggered");
+    
     $(this).css("color","blue");
   });
+
+  $('a').mouseover(function() {
+    console.log("mouseover links");
+  });
+
+  $('.dancer').mouseout(function(){
+    $(this).css({"border" : "20px"});
+  })
 
 });
 

@@ -29,8 +29,12 @@ var makeDancer = function(top, left, timeBetweenSteps){
   makeDancer.prototype.setColor = function(color){
     this.$node.css({color: color})
   }
-
+  // makeDancer.prototype.lineUp = function(){
+  //   console.log('its working')
+  //   this.$node.css({left:100});
+  //   this.oldStep = 'linedUp'
+  // }
   makeDancer.prototype.lineUp = function() {
     console.log("Inside the Dancer Class"); 
-    this.left = 200;
+    this.top = 200;
   };
