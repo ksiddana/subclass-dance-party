@@ -1,8 +1,11 @@
-var makeBlinkyDancer = function(top, left, timeBetweenSteps, color){
+var makeBlinkyDancer = function(top, left, timeBetweenSteps){
   //Constructing with the makeDancer class with the arguments passed into this function
   // console.log(makeBlinkyDancer.prototype)
-  this.$node = $('<span class="dancer"></span>')
-  makeDancer.call(this, top, left, timeBetweenSteps, color);
+  // this.$node = $('<span class="dancer"></span>')
+  makeDancer.call(this, top, left, timeBetweenSteps);
+  this.$node.css({
+    "color" : "red"
+  });
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
 
@@ -26,4 +29,14 @@ var makeBlinkyDancer = function(top, left, timeBetweenSteps, color){
     makeDancer.prototype.step.call(this);
     this.$node.toggle();
 
+  }
+
+  makeBlinkyDancer.prototype.lineUp = function(){
+    console.log('Inside the Blinky Dancer Class');
+    
+    this.$node.css({
+      "left" : "100px"
+    });
+    // this.oldStep = 'linedUp';
+    // console.log(this)
   }

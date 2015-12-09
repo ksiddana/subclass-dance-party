@@ -22,11 +22,7 @@ body, a:link, a:visited, a:active{
 }
 .dancer{
   border:10px solid;
-  border-radius:10px;
-  position:absolute;
-}
-.discoDancer{
-  border:20px solid;
+
   border-radius:10px;
   position:absolute;
 }

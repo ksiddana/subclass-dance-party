@@ -1,7 +1,10 @@
-var lineDancer = function(top, left, timeBetweenSteps, color){
-  this.$node = $('<span class="discoDancer"></span>')
+var lineDancer = function(top, left, timeBetweenSteps){
+
   makeDancer.apply(this, arguments);
-  this.color = color;
+  this.oldStep = "Up";
+  this.$node.css( {
+    "color" : "yellow"
+  });
 };
   lineDancer.prototype = Object.create(makeDancer.prototype);
   lineDancer.prototype.constructor = lineDancer;
@@ -9,17 +12,25 @@ var lineDancer = function(top, left, timeBetweenSteps, color){
     // this.top+=10;
     makeDancer.prototype.step.call(this);
         // this.top-=10;
-
-    this.$node.css({color: this.color});
-    console.log(this.$node)
-    this.$node.css({top: this.top+=10, left: this.left})
-    this.$node.toggle()
+        // console.log(this.oldStep)
+    if (this.oldStep === "Up") {
+      this.$node.css("top", "+=10");  
+      this.oldStep = "Down";
+    } else {
+      this.$node.css("top", "-=10");
+      this.oldStep = "Up";
+    } 
   };
-  // lineDancer.prototype.setColor = function(){
-  // }
+
   
   lineDancer.prototype.setPosition = function() {
-    console.log("Inside the lineDancer: ", this.top);
-    makeDancer.prototype.setPosition.call(this,this.top,this.left)
-            // this.top+=10
+    // console.log("Inside the lineDancer: ", this.top);
+    makeDancer.prototype.setPosition.call(this, this.top, this.left);
   }
+  
+  // lineDancer.prototype.lineUp = function(){
+  //   console.log('its working')
+  //   this.$node.css("left","100px");
+  //   this.oldStep = 'linedUp';
+  //   // console.log(this)
+  // }

@@ -2,6 +2,7 @@ $(document).ready(function(){
   window.dancers = [];
 
   $(".addDancerButton").on("click", function(event){
+    event.preventDefault();
     /* This function sets up the click handlers for the create-dancer
 
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -16,7 +17,7 @@ $(document).ready(function(){
      * A new object of the given type will be created and added
      * to the stage.
      */
-     var inputColor = prompt("Which color would you like? \n Red, blue, green, black, white, grey, orange or yellow?");
+     /*var inputColor = prompt("Which color would you like? \n Red, blue, green, black, white, grey, orange or yellow?");*/
 
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
 
@@ -28,17 +29,32 @@ $(document).ready(function(){
     var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.random() * 3000, inputColor
+      Math.random() * 1000
     );
+    window.dancers.push(dancer)
     $('body').append(dancer.$node);
+    $('.functionLineUp').on('click',function(e){
+    // e.stopPropagation()
+    // var functionName = $(this).data("dancer-maker-function-name");
+    // var lineUpMakerFunction = window[functionName];
+    // console.log(lineUpMakerFunction)
+        console.log(window.dancers)
+    // console.log(window.dancers[0].lineUp)
+  for (var i = 0; i < window.dancers.length; i++) {
+      // if(window.dancers[i]=== makeBlinkyDancer){
+      console.log('working')
+        window.dancers[i].lineUp();  
+    }
+  })
   });
  
-  $(".linedancer").on("click", function(){
-    // var inputColor = prompt("What color would you like?");
-    // inputColor()
+  
+
+  $(".linedancer").on("click", function(event){
+    event.preventDefault();
     var functionName = $(this).data("dancer-maker-function-name");
-    console.log(functionName)
     var makerFunction = window[functionName];
+    // console.log(makerFunction)
     function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -47,14 +63,24 @@ $(document).ready(function(){
     }
     return color;
     }
-    // console.log(window)
-    var coloredDancer = new makerFunction(
+    console.log(window.dancers)
+    var lineDancer = new makerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.random() * 1000, getRandomColor()
+      400, getRandomColor()
       );
-    $('body').append(coloredDancer.$node);
+    window.dancers.push(lineDancer)
+    $('body').append(lineDancer.$node);
   });
+
+  $('.dancer').mouseover(function(){
+    console.log('hai')
+    $(this).css({"border" : "50px"});
+  });
+
+  $('.dancer').mouseout(function(){
+    $(this).css({"border" : "20px"});
+  })
 
 });
 
